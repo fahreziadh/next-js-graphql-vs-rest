@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -12,15 +12,20 @@ import {
   useGetListTodos,
 } from "@/services/use-list-todos-graphql";
 import { cn } from "@/lib/utils";
+import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 
 export function TodoList() {
   const [newTodo, setNewTodo] = useState("");
+  const [type, setType] = useState<string>("rest");
+
 
   const {
     data: dataTodos,
     loading: loadingTodos,
     mutate: mutateTodos,
+    latency: latencyTodos,
   } = useGetListTodos({ delay: 0 });
+
 
   const addTodo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,9 +47,21 @@ export function TodoList() {
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
       <div className="flex flex-row items-start justify-between">
         <h1 className="text-2xl font-bold mb-4">Todo List</h1>
-        <a href="https://github.com/fahreziadh/next-js-graphql-vs-rest" className="text-sm text-blue-500 underline">
+        <a
+          href="https://github.com/fahreziadh/next-js-graphql-vs-rest"
+          className="text-sm text-blue-500 underline"
+        >
           Repository
         </a>
+      </div>
+      <div className="mb-4 flex flex-row justify-between items-center">
+        <Tabs value={type} onValueChange={setType}>
+          <TabsList>
+            <TabsTrigger value="rest">REST</TabsTrigger>
+            <TabsTrigger value="graphql">GraphQL</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <div>response-time: {latencyTodos}ms</div>
       </div>
       <form onSubmit={addTodo} className="flex mb-4">
         <Input

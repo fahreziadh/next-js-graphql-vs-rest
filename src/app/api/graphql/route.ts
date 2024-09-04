@@ -12,17 +12,17 @@ const resolvers = {
     addTodo: async (_: any, args: any) => {
       const { text } = args;
       await addTodo(text);
-      return null;
+      return getListTodos();
     },
     removeTodo: async (_: any, args: any) => {
       const { text } = args;
       await removeTodo(text);
-      return null;
+      return getListTodos();
     },
     toggleTodo: async (_: any, args: any) => {
       const { text } = args;
       await toggleTodo(text);
-      return null;
+      return getListTodos();
     },
   },
 };
