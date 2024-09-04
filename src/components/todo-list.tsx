@@ -10,7 +10,7 @@ import {
   mutateRemoveTodo,
   mutateToggleTodo,
   useGetListTodos,
-} from "@/services/use-get-list-todos";
+} from "@/services/use-list-todos-graphql";
 import { cn } from "@/lib/utils";
 
 export function TodoList() {
