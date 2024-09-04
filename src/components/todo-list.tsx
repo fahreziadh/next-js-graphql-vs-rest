@@ -20,7 +20,7 @@ export function TodoList() {
     data: dataTodos,
     loading: loadingTodos,
     mutate: mutateTodos,
-  } = useGetListTodos({delay:0});
+  } = useGetListTodos({ delay: 0 });
 
   const addTodo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +40,12 @@ export function TodoList() {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-4">Todo List</h1>
+      <div className="flex flex-row items-start justify-between">
+        <h1 className="text-2xl font-bold mb-4">Todo List</h1>
+        <a href="https://github.com/fahreziadh/next-js-graphql-vs-rest" className="text-sm text-blue-500 underline">
+          Repository
+        </a>
+      </div>
       <form onSubmit={addTodo} className="flex mb-4">
         <Input
           type="text"
@@ -85,7 +90,7 @@ export function TodoList() {
         ))}
       </ul>
       <div className="flex items-center justify-center p-4 text-gray-500">
-        {loadingTodos && !dataTodos.length ? "Loading..." :  ""}
+        {loadingTodos && !dataTodos.length ? "Loading..." : ""}
         {!loadingTodos && !dataTodos.length ? "No todos yet" : ""}
       </div>
     </div>
